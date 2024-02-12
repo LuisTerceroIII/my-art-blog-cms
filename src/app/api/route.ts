@@ -27,6 +27,12 @@ export async function POST(req: Request) {
 
 	const body = await req.json()
 	try {
+		if(body?.securityKey != process.env.POST_ARTICLE_SECRET_KEY) {
+			return NextResponse.json({
+				status: 401,
+				message: 'Anauthorized',
+			})
+		}
 		const newArticleRef: DocumentReference = await addDoc(collection(db, "articles"), Object.assign(
 			{
 				author: {
@@ -50,7 +56,7 @@ export async function POST(req: Request) {
 		const newFileRef = ref(storage, `articles/${userId}/${newArticleRef?.id}/${body.title}.md`)
 
 		const fileBlob = new Blob([body?.content], { type: "text/plain" })
-		
+
 		await uploadBytes(newFileRef, fileBlob).then((snapshot: UploadResult) => {
 			console.log('Uploaded a blob or file!')
 		})

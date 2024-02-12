@@ -41,6 +41,11 @@
     height: auto;
     width: 300px;
   }
+  .error {
+    font-size: 12;
+    color: tomato;
+    text-align: center;
+  }
   
   /* Media queries for responsive design */
   

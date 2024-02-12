@@ -13,6 +13,7 @@ const Form: React.FC = () => {
 	const [mainImage, setMainImage] = useState('')
 	const [submitState, setSubmitState] = useState(FetchState.IDLE)
 	const [formHasError, setFormHasError] = useState(false)
+	const [errorMessage, setErrorMessage] = useState('')
 
 	const checkErros = () => {
 		if (title?.length === 0) {
@@ -33,7 +34,9 @@ const Form: React.FC = () => {
 		e.preventDefault()
 		checkErros()
 		if (formHasError) return
+
 		setSubmitState(FetchState.LOADING)
+
 		const res = await fetch('/api', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -45,15 +48,15 @@ const Form: React.FC = () => {
 			headers: {
 				'Content-Type': 'application/json'
 			}
-		});
-
-		const data = await res?.json()
-		//
-		if (res?.status === 200) setSubmitState(FetchState.SUCCESS)
-		else setSubmitState(FetchState.ERROR)
-
-
-
+		})
+		const data = await res.json()
+		if (data?.status === 200) {
+			setSubmitState(FetchState.SUCCESS)
+			setErrorMessage("")
+		} else {
+			setSubmitState(FetchState.ERROR)
+			setErrorMessage(data?.message)
+		}
 	}
 
 	return (
@@ -92,6 +95,7 @@ const Form: React.FC = () => {
 					<button type="submit" className={styles.button}>
 						{submitState === FetchState.ERROR ? "Retry" : "Submit"}
 					</button>
+					{errorMessage?.length > 0 && <p className={styles.error}>{errorMessage}</p>}
 				</>
 			}
 		</form>
