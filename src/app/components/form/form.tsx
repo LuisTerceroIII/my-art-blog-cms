@@ -12,28 +12,38 @@ const Form: React.FC = () => {
 	const [content, setContent] = useState('')
 	const [mainImage, setMainImage] = useState('')
 	const [submitState, setSubmitState] = useState(FetchState.IDLE)
-	const [formHasError, setFormHasError] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
 
 	const checkErros = () => {
+		if (mainImage?.length === 0) {
+			setErrorMessage("Main Image is required")
+			return true
+		}
 		if (title?.length === 0) {
-			setFormHasError(true)
+			console.log("Title is required")
+			setErrorMessage("Title is required")
+			return true
 		}
 		if (securityKey?.length === 0) {
-			setFormHasError(true)
+			setErrorMessage("Security Key is required")
+			return true
+			
+		}
+		if(securityKey !== process.env.POST_ARTICLE_SECRET_KEY) {
+			setErrorMessage("Security Key is incorrect")
+			return true
+			
 		}
 		if (content?.length === 0) {
-			setFormHasError(true)
-		}
-		if (mainImage?.length === 0) {
-			setFormHasError(true)
+			setErrorMessage("Content is required")
+			return true
+			
 		}
 	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		checkErros()
-		if (formHasError) return
+		if(checkErros()) return
 
 		setSubmitState(FetchState.LOADING)
 
@@ -93,7 +103,7 @@ const Form: React.FC = () => {
 						onChange={(e) => setContent(e.target.value)}
 					/>
 					<button type="submit" className={styles.button}>
-						{submitState === FetchState.ERROR ? "Retry" : "Submit"}
+						{submitState === FetchState.ERROR || errorMessage?.length > 0 ? "Retry" : "Submit"}
 					</button>
 					{errorMessage?.length > 0 && <p className={styles.error}>{errorMessage}</p>}
 				</>
