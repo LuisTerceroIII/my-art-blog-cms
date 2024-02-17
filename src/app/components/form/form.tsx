@@ -108,7 +108,7 @@ const Form: React.FC = () => {
 						value={content}
 						onChange={(e) => setContent(e.target.value)}
 					/> */}
-					<div style={{ border: '1px solid black', width: "90%", position: "relative" }}>
+					<div style={{ border: '1px solid black', width: "90%", position: "relative", minHeight: 300, backgroundColor: "#d4fff1" }}>
 						<MKDEditor onChange={setContent} editorRef={mkdRef} markdown={content} />
 					</div>
 					<button type="submit" className={styles.button}>

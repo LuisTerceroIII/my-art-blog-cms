@@ -43,3 +43,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {
+	--dark-bg-main: #151526;
+	--dark-bg-secondary: #3a5c6273;
+	--dark-primary: #d7bdbd;
+	--dark-secondary: #d4fff1;
+}

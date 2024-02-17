@@ -16,6 +16,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 15px;
+  background-color: var(--dark-secondary);
 }
 
 .textarea {
@@ -28,4 +29,6 @@
   border-radius: 5px;
   margin-top: 15px;
   resize: none;
+  background-color: var(--dark-secondary);
+
 }

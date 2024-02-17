@@ -5,4 +5,16 @@
   align-items: center;
   padding-top: 60px;
   padding-bottom: 60px;
+  background-color: #151526;
+  height: max-content;
+  min-height: 100svh;
 }
+.signature {
+	position: absolute;
+	top: 35px;
+	right: 40px;
+	width: 200px;
+	height: auto;
+	object-fit: contain;
+}
+
