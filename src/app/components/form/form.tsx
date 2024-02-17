@@ -17,7 +17,6 @@ const Form: React.FC = () => {
 	const [title, setTitle] = useState('')
 	const [securityKey, setSecurityKey] = useState('')
 	const [content, setContent] = useState('')
-	console.log("🚀 ~ content:", content)
 	const [mainImage, setMainImage] = useState('')
 	const [submitState, setSubmitState] = useState(FetchState.IDLE)
 	const [errorMessage, setErrorMessage] = useState('')
@@ -33,7 +32,6 @@ const Form: React.FC = () => {
 			return true
 		}
 		if (title?.length === 0) {
-			console.log("Title is required")
 			setErrorMessage("Title is required")
 			return true
 		}
