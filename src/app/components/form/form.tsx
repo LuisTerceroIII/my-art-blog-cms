@@ -78,7 +78,7 @@ const Form: React.FC = () => {
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
 			<h1 className={styles.title}>New article Folium Ater</h1>
-			{submitState === FetchState.LOADING ? <Loader style={{ textAlign: "center" }} /> :
+			{ submitState === FetchState.LOADING ? <Loader style={{ textAlign: "center" }} /> :
 				<>
 					<Input
 						label="Photo"
